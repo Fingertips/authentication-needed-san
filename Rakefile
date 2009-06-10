@@ -33,10 +33,10 @@ begin
 rescue LoadError
 end
 
-# begin
-#   require 'jewelry_portfolio/tasks'
-#   JewelryPortfolio::Tasks.new do |p|
-#     p.account = 'Fingertips'
-#   end
-# rescue LoadError
-# end
+begin
+  require 'jewelry_portfolio/tasks'
+  JewelryPortfolio::Tasks.new do |p|
+    p.account = 'Fingertips'
+  end
+rescue LoadError
+end
