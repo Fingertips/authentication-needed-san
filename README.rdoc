@@ -22,6 +22,10 @@ ApplicationController would look something like the following:
         authentication_needed!
       end
     end
+
+    def when_authentication_needed
+      redirect_to new_session_url
+    end
   end
 
 The authorization-san plugin is available at:
