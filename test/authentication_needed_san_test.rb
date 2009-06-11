@@ -15,7 +15,7 @@ class TestController < ApplicationController
   end
   
   def authenticate
-    finish_authentication_needed!
+    finish_authentication_needed! or redirect_to(some_other_url)
   end
   
   private
@@ -26,6 +26,10 @@ class TestController < ApplicationController
   
   def new_session_url
     "http://test/sessions/new"
+  end
+  
+  def some_other_url
+    "http://test/manage/articles/new"
   end
 end
 
@@ -82,6 +86,11 @@ class AuthenticationNeededTest < ActionController::TestCase
     get :authenticate, {}, {}, flash
   end
   
+  test "should return `false' when #finish_authentication_needed! is called but no :after_authentication data exists so the user can do something else" do
+    get :authenticate
+    assert_redirected_to some_other_url
+  end
+  
   private
   
   def url_for(action)
@@ -90,6 +99,10 @@ class AuthenticationNeededTest < ActionController::TestCase
   
   def new_session_url
     @controller.send :new_session_url
+  end
+  
+  def some_other_url
+    @controller.send :some_other_url
   end
   
   def stubbed_flash

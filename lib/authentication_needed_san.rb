@@ -60,7 +60,11 @@ module AuthenticationNeededSan
   # redirected ‘back’ to the page she originally requested _before_
   # authentication_needed! was called.
   def finish_authentication_needed!
-    flash.discard :after_authentication
-    redirect_to after_authentication[:redirect_to]
+    if authentication_needed?
+      flash.discard :after_authentication
+      redirect_to after_authentication[:redirect_to]
+    else
+      false
+    end
   end
 end
