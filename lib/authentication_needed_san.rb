@@ -59,6 +59,16 @@ module AuthenticationNeededSan
   # Finish the after_authentication flow, which means the user will be
   # redirected ‘back’ to the page she originally requested _before_
   # authentication_needed! was called.
+  #
+  # This method returns +false+ if no authentication was needed, this way you
+  # can easily specify a default redirection:
+  #
+  #   class SessionsController < ApplicationController
+  #     def create
+  #       # login code...
+  #       finish_authentication_needed! or redirect_to(root_url)
+  #     end
+  #   end
   def finish_authentication_needed!
     if authentication_needed?
       flash.discard :after_authentication

@@ -28,5 +28,15 @@ ApplicationController would look something like the following:
     end
   end
 
+Then from your sessions controller redirect the user back to the page she
+requested or the default one:
+
+  class SessionsController < ApplicationController
+    def create
+      # login code...
+      finish_authentication_needed! or redirect_to(root_url)
+    end
+  end
+
 The authorization-san plugin is available at:
 http://github.com/Fingertips/authorization-san
