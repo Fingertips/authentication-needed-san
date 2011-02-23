@@ -2,9 +2,10 @@ $:.unshift File.expand_path('../../lib', __FILE__)
 
 begin
   require 'rubygems'
+  gem 'rails', '< 3.0'
 rescue LoadError
 end
-require 'active_support'
+require 'active_support/all'
 require 'action_controller'
 require 'action_controller/test_case'
  

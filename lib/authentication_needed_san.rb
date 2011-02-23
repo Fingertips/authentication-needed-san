@@ -78,3 +78,5 @@ module AuthenticationNeededSan
     end
   end
 end
+
+ActionController::Base.send(:include, AuthenticationNeededSan)
